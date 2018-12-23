@@ -9,6 +9,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -20,9 +21,11 @@ public class BrowserActivity extends AppCompatActivity implements TabLayout.Base
     private FloatingActionButton mFab;
     private FloatingActionButton mFab1;
     private FloatingActionButton mFab2;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_browser);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,27 +54,32 @@ public class BrowserActivity extends AppCompatActivity implements TabLayout.Base
                     BrowserActivity.this.setTitle(title);
                 }
             }
+
+            @Override
+            public boolean onConsoleMessage (ConsoleMessage consoleMessage) {
+                Log.d("ConsoleMessage", consoleMessage.message());
+                return true;
+            }
+
         });
         if (savedInstanceState == null) {
             mWebView.loadUrl("file:///android_asset/index.html");
         } else {
-            mTabLayout.getTabAt(savedInstanceState.getInt("tabState", 0)).select();
+            mWebView.restoreState(savedInstanceState);
         }
     }
 
     @Override
-    protected void onSaveInstanceState(Bundle outState )
-    {
+    protected void onSaveInstanceState(Bundle outState) {
+        Log.d("XXX", "onSaveInstanceState");
         super.onSaveInstanceState(outState);
+
         mWebView.saveState(outState);
-
-        outState.putInt("tabState", mTabLayout.getSelectedTabPosition());
-
     }
 
     @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState)
-    {
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        Log.d("XXX", "onRestoreInstanceState");
         super.onRestoreInstanceState(savedInstanceState);
         mWebView.restoreState(savedInstanceState);
     }
@@ -79,7 +87,6 @@ public class BrowserActivity extends AppCompatActivity implements TabLayout.Base
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
         mTabLayout.removeOnTabSelectedListener(this);
     }
 
@@ -106,5 +113,6 @@ public class BrowserActivity extends AppCompatActivity implements TabLayout.Base
         //mWebView.reload();
         mFab1.animate().translationY(-getResources().getDimension(R.dimen.standard_55));
         mFab2.animate().translationY(-getResources().getDimension(R.dimen.standard_100));
+        mWebView.reload();
     }
 }

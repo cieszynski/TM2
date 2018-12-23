@@ -21,9 +21,22 @@
         </activity>
         <activity
             android:name=".BrowserActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_browser"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar">
+
+            <!-- https://stackoverflow.com/questions/5628924/my-webview-reloads-when-i-change-from-portrait-to-landscape/11903662#11903662 -->
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="de.cieszynski.tm.MainActivity" />
+        </activity>
+        <activity
+            android:name=".TabbedActivity"
+            android:label="@string/title_activity_tabbed"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="de.cieszynski.tm.MainActivity" />

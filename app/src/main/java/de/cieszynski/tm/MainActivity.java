@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Intent intent = new Intent(this, BrowserActivity.class);
+        Intent intent = new Intent(this, TabbedActivity.class);
 
 
         if (id == R.id.nav_camera) {
