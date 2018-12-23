@@ -1,0 +1,10 @@
+<resources>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <!--
+        https://stackoverflow.com/questions/32428700/status-bar-turns-white-and-does-not-show-content-behind-it
+        <item name="android:statusBarColor">@android:color/transparent</item>-->
+    </style>
+</resources>

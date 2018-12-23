@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>templates</title>
+    <meta charset="utf-8"/>
+    <script>
+            onload = function(e) {
+                var t = document.getElementsByTagName('template'),
+                    i = Math.floor(Math.random() * t.length);
+
+                document.body.appendChild(t.item(i).content);
+                //console.debug(t)
+                //console.log(t.length+'  '+(Math.floor(Math.random() * t.length)));
+            }
+
+        </script>
+</head>
+
+<body>
+<template id="a">
+    <p>a</p>9
+</template>
+<template id="b">
+    <p>b</p>
+</template>
+<template id="c">
+    <p>c</p>
+</template>
+</body>
+</html>
